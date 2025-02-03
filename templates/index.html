@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск изображений</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 80%; margin: 0 auto; text-align: center; }
+        .images { display: flex; flex-wrap: wrap; justify-content: center; }
+        .image-container { margin: 10px; }
+        img { width: 200px; height: auto; border-radius: 10px; }
+        .form-container { margin-bottom: 20px; }
+        input[type="text"] { padding: 10px; width: 300px; font-size: 16px; }
+        input[type="submit"] { padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        input[type="submit"]:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Поиск изображений</h1>
+    
+    <div class="form-container">
+        <form method="POST">
+            <input type="text" name="query" placeholder="Введите запрос для поиска..." required>
+            <input type="submit" value="Поиск">
+        </form>
+    </div>
+
+    <div class="images">
+        {% if images %}
+            {% for image in images %}
+                <div class="image-container">
+                    <img src="{{ url_for('static', filename=image) }}" alt="{{ image }}">
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Не найдено изображений по вашему запросу.</p>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>
